@@ -2,17 +2,16 @@ SRCS = main.c
 
 NAME = solong
 
-CC = gcc
+CC = gcc -Wall -Wextra -Werror -fsanitize=address
 
 OBJS = $(SRCS:.c=.o)
-
-CFLAGS = -Wall -Wextra -Werror
 
 ARCS = gnl/get_next_line.a
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
+	@cd ./mlx && $(MAKE)
 	@cd ./gnl && $(MAKE)
 	$(CC) $(ARCS) $(OBJS) -o $(NAME)
 
@@ -21,6 +20,7 @@ clean :
 	rm -rf $(OBJS)
 
 fclean : clean
+	@cd ./mlx && $(MAKE) clean
 	@cd ./gnl && $(MAKE) fclean
 	rm -rf $(NAME)
 

@@ -1,8 +1,6 @@
 NAME = get_next_line.a
 
-CC= gcc
-
-CCFLAGS= -Wall -Werror -Wextra
+CC= gcc -Wall -Werror -Wextra
 
 SRCS= get_next_line.c get_next_line_utils.c
 

@@ -1,33 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   deneme.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/21 19:59:08 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/22 13:52:23 by mtoktas          ###   ########.fr       */
+/*   Created: 2023/08/22 20:16:28 by mtoktas           #+#    #+#             */
+/*   Updated: 2023/08/22 21:20:31 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include <unistd.h>
+#include <stdio.h>
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
+int	ft_strlen(char *s)
+{
+	int	i;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
 
+int check_ber(char *s)
+{
+    int i;
+    
+	if(!s)
+        return (0);
+    i = ft_strlen(s);
+	i--;
+    if (s[i] != 'r' || s[i-1] != 'e' || s[i-2] != 'b')
+    {
+        return (0);
+    }
+    return(1);
+}
 
-int		ft_strlen(char *s);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strchr(char *s, int c);
-char	*ft_next(char *str);
-char	*ft_line(char *str);
-char	*ft_read(char *str, int fd);
-char	*get_next_line(int fd);
-
-#endif
+int main(int ac, char *av[])
+{
+    char *s = av[1];
+    printf("%d\n", check_ber(s));
+}

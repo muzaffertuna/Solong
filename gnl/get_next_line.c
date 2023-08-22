@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:59:05 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/21 19:14:10 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/22 17:27:45 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_line(char *str)
 	i = 0;
 	while (str[i] && str[i] != '\n')
 		i++;
-	line = (char *)malloc(sizeof(char) * (i + 2));
+	line = (char *)malloc(sizeof(char) * (i + 1));
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -60,8 +60,6 @@ char	*ft_line(char *str)
 		line[i] = str[i];
 		i++;
 	}
-	if (str[i] == '\n')
-		line[i++] = '\n';
 	line[i] = '\0';
 	return (line);
 }
