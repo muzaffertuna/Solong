@@ -6,40 +6,29 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 20:16:28 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/22 21:20:31 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/23 15:59:36 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
 
-int	ft_strlen(char *s)
+void fill_flood(char **map, int i, int j)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-int check_ber(char *s)
-{
-    int i;
-    
-	if(!s)
-        return (0);
-    i = ft_strlen(s);
-	i--;
-    if (s[i] != 'r' || s[i-1] != 'e' || s[i-2] != 'b')
-    {
-        return (0);
-    }
-    return(1);
+	
+	if(i == '0' || j == '0')
+		return ;
+	if(map[i][j] == 'E' || map[i][j] == 'C' || map[i][j] == 'P')
+		map[i][j] == '0';
+	if(map[i][j] == '1')
+		return ;
+	ft_flood(map, i + 1, j);
+	ft_flood(map, i - 1, j);
+	ft_flood(map, i, j + 1);
+	ft_flood(map, i, j - 1);
 }
 
 int main(int ac, char *av[])
 {
-    char *s = av[1];
-    printf("%d\n", check_ber(s));
+    
 }
