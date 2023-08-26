@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   checkmap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:37:33 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/23 19:34:31 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/26 15:47:34 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,10 @@ int ft_ismapsetok(char **map)
 	return (1);
 }
 
-t_map* ft_get_map_data(int fd)
-{
-	t_map *x;
-	
+int ft_get_map_data(int fd, t_map *x)
+{	
 	if(!fd)
-		return ;
+		return 0;
 	char *s = get_next_line(fd);
 	x->column = ft_strlen(s);
 	x->row = 0;
@@ -62,14 +60,39 @@ t_map* ft_get_map_data(int fd)
 	{
 		if(x->column != ft_strlen(s))
 		{
-			return ;
+			free(x);
+			return (0);
 		}
 		x->column = ft_strlen(s);
 		s = get_next_line(fd);
 		x->row++;
 	}
 	free(s);
-	return (x);
+	return (1);
+}
+
+int ft_get_player_data(char **map, t_player *p)
+{
+	int i;
+	int j;
+	
+	i = 0;
+	while(map[i])
+	{
+		j = 0;
+		while(map[i][j])
+		{
+			if(map[i][j] == 'P')
+			{
+				p->p_row = i;
+				p->p_col = j;
+				return (1);			
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
 
 char **init_map(t_map *x,int fd)
@@ -78,7 +101,7 @@ char **init_map(t_map *x,int fd)
 	
 	i = 0;
 	if(!fd)
-		return ;
+		return NULL;
 	char **map = (char **)malloc(sizeof(char *) * (x->row + 1));
 	while(i < x->row)
 	{
@@ -111,7 +134,7 @@ int check_walls(char **map, t_map *x)
 	return (1);
 }
 
-int check_map_element_start(char **map, t_map *x)
+int check_map_element_start(char **map)
 {
 	int start;
 	int i;
@@ -126,8 +149,6 @@ int check_map_element_start(char **map, t_map *x)
 		{
 			if(map[i][j] == 'P')
 			{
-				x->row = i;
-				x->column = j;
 				start++;
 			}
 			j++;
@@ -256,44 +277,90 @@ int check_path(char **map)
 				return (0);
 			j++;
 		}
+		i++;
 	}
 	return (1);
 }
 
-int check_map(char **map, t_map *x, char *s)
+int check_map(char **map, t_map *x, t_player *p, char *s)
 {
 	if(!check_ber(s))
+	{
+		printf("File extensiton must be .ber \n");
 		return (0);
+	}
+	if(!ft_ismapsetok(map))
+	{
+		printf("Map characters are not correct.\n");
+		return (0);
+	}
 	if(!check_walls(map, x))
+	{
+		printf("Walls are not correct.\n");
 		return (0);
-	if(!check_map_element_start(map, x))
+	}
+	if(!check_map_element_start(map))
+	{
+		printf("Player incorrect.\n");
 		return (0);
+	}
 	if(!check_map_element_exit(map))
+	{
+		printf("Exit incorrect.\n");
 		return (0);
+	}
 	if(!check_map_element_coll(map))
+	{
+		printf("Collectibles incorrect\n");
 		return (0);
+	}
 	if(!check_player_free(map))
+	{
+		printf("Player not free.\n");
 		return (0);
+	}
+	fill_flood(map, p->p_row, p->p_col, x);
+	if(!check_path(map))
+	{
+		printf("There are not correct path between player and exit.\n");
+		return (0);
+	}
 	return (1);
 }
 
-int main(int ac, char *av[])
+void writemap(char **map)
 {
-	int fd = open("./maps/example.ber", O_RDONLY);
-	t_map *x = (t_map *)malloc(sizeof(t_map));
-	int fd2 = open("./maps/example.ber", O_RDONLY);
-	char **map = init_map(x, fd2);
-	if(!check_map(map, x, av[1]))
+	int i = 0;
+	while(map[i])
 	{
-		printf("Map is incorrect\n");
-		return ;
+		printf("%s\n", map[i]);
+		i++;
 	}
-	fill_flood(map, x->p_row, x->p_col, x);
-	if(!check_path(map))
+}
+
+int main(int ac, char **av)
+{
+	(void) ac;
+	int fd = open("./maps/example.ber", O_RDONLY);
+	t_map *x = malloc(sizeof(t_map *));
+	t_player *p = malloc(sizeof(t_player *));
+	int fd2 = open("./maps/example.ber", O_RDONLY);
+	if(!ft_get_map_data(fd, x))
 	{
-		printf("Map is incorrect\n");
-		return ;
+		printf("Gnl ile okuma yaparken hata aldık map hatalı. \n\n");
+		return (0);
+	}
+	char **map = init_map(x, fd2);
+	if(!ft_get_player_data(map, p))
+	{
+		printf("Player hatalı. \n\n");
+		return (0);
+	}
+	if(!check_map(map, x, p, av[1]))
+	{
+		printf("Check_map Map is incorrect\n");
+		return (0);
 	}
 	printf("Map was clear \n");
-	
+	writemap(map);
 }

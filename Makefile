@@ -1,4 +1,4 @@
-SRCS = main.c
+SRCS = checkmap.c
 
 NAME = solong
 
