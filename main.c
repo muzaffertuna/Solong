@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 18:42:10 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/27 19:00:21 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/27 21:09:54 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int main(int ac, char **av)
 		printf("Window initilize hatası\n");
 	}
 	draw_map(map, *window);
+	mlx_hook(window->mlx_win, 2, 0, keyhandle, window);
 	mlx_loop(window->mlx);
-    printf("Row : %d\n", x->row);
-    printf("Column : %d\n", x->column);
+	
 }
