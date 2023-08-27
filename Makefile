@@ -1,19 +1,21 @@
-SRCS = checkmap.c
+SRCS = checkmap.c drawmap.c init.c main.c
 
 NAME = solong
 
-CC = gcc -Wall -Wextra -Werror -fsanitize=address
+CC = gcc -Wall -Wextra -Werror
 
 OBJS = $(SRCS:.c=.o)
 
-ARCS = gnl/get_next_line.a
+ARCS = gnl/get_next_line.a mlx/libmlx.a 
+
+FRMS = -framework OpenGL -framework AppKit
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
 	@cd ./mlx && $(MAKE)
 	@cd ./gnl && $(MAKE)
-	$(CC) $(ARCS) $(OBJS) -o $(NAME)
+	$(CC) $(ARCS) $(FRMS) $(OBJS) -o $(NAME)
 
 clean : 
 	@cd ./gnl && $(MAKE) clean

@@ -6,12 +6,11 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:37:33 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/26 15:47:34 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/27 18:43:08 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
-#include <stdio.h>
 
 int ft_isinset(char s,char *set)
 {
@@ -338,29 +337,4 @@ void writemap(char **map)
 	}
 }
 
-int main(int ac, char **av)
-{
-	(void) ac;
-	int fd = open("./maps/example.ber", O_RDONLY);
-	t_map *x = malloc(sizeof(t_map *));
-	t_player *p = malloc(sizeof(t_player *));
-	int fd2 = open("./maps/example.ber", O_RDONLY);
-	if(!ft_get_map_data(fd, x))
-	{
-		printf("Gnl ile okuma yaparken hata aldık map hatalı. \n\n");
-		return (0);
-	}
-	char **map = init_map(x, fd2);
-	if(!ft_get_player_data(map, p))
-	{
-		printf("Player hatalı. \n\n");
-		return (0);
-	}
-	if(!check_map(map, x, p, av[1]))
-	{
-		printf("Check_map Map is incorrect\n");
-		return (0);
-	}
-	printf("Map was clear \n");
-	writemap(map);
-}
+
