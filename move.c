@@ -6,18 +6,33 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:01:09 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/27 21:09:55 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/28 20:01:50 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
 
-void exit()
+int exit_window(t_window *window)
 {
-    printf("Exit\n");
+    mlx_destroy_image(window->mlx, window->img->img_p);
+    mlx_destroy_image(window->mlx, window->img->img_e);
+    mlx_destroy_image(window->mlx, window->img->img_c);
+    mlx_destroy_image(window->mlx, window->img->img_w);
+    mlx_destroy_image(window->mlx, window->img->img_bg);
+    free(window->img);
+    mlx_destroy_window(window->mlx, window->mlx_win);
+    int i = 0;
+    while(window->map[i])
+    {
+        free(window->map[i++]);
+    }
+    free(window->map);
+    system("leaks solong");
+    exit(1);
+    return (1);
 }
 
-int coll_control_exit(char **map)
+int coll_control_to_exit(char **map)
 {
 	int i;
 	int j;
@@ -37,81 +52,89 @@ int coll_control_exit(char **map)
 	return (1);
 }
 
-int move_left(char **map, t_player *player)
+int move_left(t_window *window)
 {
-    int i = player->p_row;
-    int j = player->p_col - 1;
-    if(map[i][j] == '0' || map[i][j] == 'C')
+    int i = window->player->p_row;
+    int j = window->player->p_col - 1;
+    if(window->map[i][j] == '0' || window->map[i][j] == 'C')
     {
-        map[i][j] == 'P';
-        map[i][j + 1] == '0';
-        player->p_col -= 1;
+        window->map[i][j] = 'P';
+        window->map[i][j + 1] = '0';
+        window->player->p_col -= 1;
         return (1);
     }
-    if(map[i][j] == 'E' && coll_control_exit(map))
+    if(window->map[i][j] == 'E' && coll_control_to_exit(window->map))
     {
-        map[i][j + 1] == '0';
-        exit();
+        window->map[i][j + 1] = '0';
+        printf("move count : %d\n", window->move_count + 1);
+        printf("GAME OVER\n");
+        exit_window(window);
         return (1);
     }
     return (0);
 }
 
-int move_right(char **map, t_player *player)
+int move_right(t_window *window)
 {
-    int i = player->p_row;
-    int j = player->p_col + 1;
-    if(map[i][j] == '0' || map[i][j] == 'C')
+    int i = window->player->p_row;
+    int j = window->player->p_col + 1;
+    if(window->map[i][j] == '0' || window->map[i][j] == 'C')
     {
-        map[i][j] == 'P';
-        map[i][j - 1] == '0';
-        player->p_col += 1;
+        window->map[i][j] = 'P';
+        window->map[i][j - 1] = '0';
+        window->player->p_col += 1;
         return (1);
     }
-    if(map[i][j] == 'E' && coll_control_exit(map))
+    if(window->map[i][j] == 'E' && coll_control_to_exit(window->map))
     {
-        map[i][j - 1] == '0';
-        exit();
+        window->map[i][j - 1] = '0';
+        printf("move count : %d\n", window->move_count + 1);
+        printf("GAME OVER\n");
+        exit_window(window);
         return (1);
     }
     return (0);
 }
 
-int move_up(char **map, t_player *player)
+int move_down(t_window *window)
 {
-    int i = player->p_row + 1;
-    int j = player->p_col;
-    if(map[i][j] == '0' || map[i][j] == 'C')
+    int i = window->player->p_row + 1;
+    int j = window->player->p_col;
+    if(window->map[i][j] == '0' || window->map[i][j] == 'C')
     {
-        map[i][j] == 'P';
-        map[i - 1][j] == '0';
-        player->p_row += 1;
+        window->map[i][j] = 'P';
+        window->map[i - 1][j] = '0';
+        window->player->p_row += 1;
         return (1);
     }
-    if(map[i][j] == 'E' && coll_control_exit(map))
+    if(window->map[i][j] == 'E' && coll_control_to_exit(window->map))
     {
-        map[i - 1][j] == '0';
-        exit();
+        window->map[i - 1][j] = '0';
+        printf("move count : %d\n", window->move_count + 1);
+        printf("GAME OVER\n");
+        exit_window(window);
         return (1);
     }
     return (0);
 }
 
-int move_down(char **map, t_player *player)
+int move_up(t_window *window)
 {
-    int i = player->p_row - 1;
-    int j = player->p_col;
-    if(map[i][j] == '0' || map[i][j] == 'C')
+    int i = window->player->p_row - 1;
+    int j = window->player->p_col;
+    if(window->map[i][j] == '0' || window->map[i][j] == 'C')
     {
-        map[i][j] == 'P';
-        map[i + 1][j] == '0';
-        player->p_row -= 1;
+        window->map[i][j] = 'P';
+        window->map[i + 1][j] = '0';
+        window->player->p_row -= 1;
         return (1);
     }
-    if(map[i][j] == 'E' && coll_control_exit(map))
+    if(window->map[i][j] == 'E' && coll_control_to_exit(window->map))
     {
-        map[i + 1][j] == '0';
-        exit();
+        window->map[i + 1][j] = '0';
+        printf("move count : %d\n", window->move_count + 1);
+        printf("GAME OVER\n");
+        exit_window(window);
         return (1);
     }
     return (0);

@@ -1,4 +1,4 @@
-SRCS = checkmap.c drawmap.c init.c main.c
+SRCS = checkmap.c drawmap.c init.c main.c handle.c move.c
 
 NAME = solong
 

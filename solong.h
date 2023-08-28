@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:35:10 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/27 21:09:51 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/28 18:58:42 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ typedef struct s_window
     void *mlx;
     void *mlx_win;
     t_img *img;
-    
+    char **map;
+    t_player *player;
+    int move_count;
+    int check;
 }   t_window;
 
 int ft_isinset(char s,char *set);
@@ -65,14 +68,14 @@ void fill_flood(char **map, int i, int j, t_map *x);
 int check_path(char **map);
 int check_map(char **map, t_map *x, t_player *p, char *s);
 void writemap(char **map);
-void    draw_map(char **map, t_window window);
+void    draw_map(t_window *window);
 int init_window(t_window *window, t_map *map);
-int keyhandle(int keycode , t_window *window, char **map, t_player *player);
-int coll_control_exit(char **map);
-int move_left(char **map, t_player *player);
-int move_right(char **map, t_player *player);
-int move_up(char **map, t_player *player);
-int move_down(char **map, t_player *player);
-void exit();
+int keyhandle(int keycode , t_window *window);
+int coll_control_to_exit(char **map);
+int move_left(t_window *window);
+int move_right(t_window *window);
+int move_up(t_window *window);
+int move_down(t_window *window);
+int exit_window(t_window *window);
 
 #endif

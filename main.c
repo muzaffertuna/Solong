@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 18:42:10 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/27 21:09:54 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/28 20:01:46 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,27 @@ int main(int ac, char **av)
 	}
 	printf("Map was clear \n");
 	//writemap(map);
+	int i = 0;
+	while(map[i])
+	{
+		free(map[i++]);
+	}
+	free(map);
 	int fd3 = open("./maps/example.ber", O_RDONLY);
 	map = init_map(x, fd3);
 	//writemap(map);
 	
 	t_window *window = malloc(sizeof(t_window));
 	window->img = malloc(sizeof(t_img));
-	
+	window->map = map;
+	window->player = p;
 	if(!init_window(window, x))
 	{
 		printf("Window initilize hatası\n");
 	}
-	draw_map(map, *window);
+	draw_map(window);
 	mlx_hook(window->mlx_win, 2, 0, keyhandle, window);
+	mlx_hook(window->mlx_win, 17, 0, exit_window, window);
 	mlx_loop(window->mlx);
-	
 }
+
