@@ -6,11 +6,33 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 19:18:41 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/29 17:12:55 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/29 18:12:25 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
+
+int	exit_window(t_window *window)
+{
+	int	i;
+
+	i = 0;
+	mlx_destroy_image(window->mlx, window->img->img_p);
+	mlx_destroy_image(window->mlx, window->img->img_e);
+	mlx_destroy_image(window->mlx, window->img->img_c);
+	mlx_destroy_image(window->mlx, window->img->img_w);
+	mlx_destroy_image(window->mlx, window->img->img_bg);
+	free(window->img);
+	mlx_destroy_window(window->mlx, window->mlx_win);
+	while (window->map[i])
+	{
+		free(window->map[i++]);
+	}
+	free(window->map);
+	free(window->player);
+	exit(1);
+	return (1);
+}
 
 int	keyhandle(int keycode, t_window *window)
 {
@@ -24,7 +46,7 @@ int	keyhandle(int keycode, t_window *window)
 		window->check = move_up(window);
 	else if (keycode == 53)
 	{
-		write(2, "ESC exit. \n", 11);
+		write(1, "ESC exit. \n", 11);
 		exit_window(window);
 		return (1);
 	}

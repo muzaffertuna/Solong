@@ -2,7 +2,7 @@ SRCS = checkmap.c checkmap2.c checkpath.c drawmap.c init.c main.c handle.c move.
 
 NAME = so_long
 
-CC = gcc -Wall -Wextra -Werror
+CC = gcc -Wall -Wextra -Werror -fsanitize=address
 
 OBJS = $(SRCS:.c=.o)
 

@@ -2,6 +2,7 @@
     "files.associations": {
         "get_next_line.h": "c",
         "mlx.h": "c",
-        "unistd.h": "c"
+        "unistd.h": "c",
+        "solong.h": "c"
     }
 }

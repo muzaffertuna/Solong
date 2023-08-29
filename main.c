@@ -6,55 +6,60 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 18:42:10 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/29 15:24:37 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/29 21:58:23 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
 
-int main(int ac, char **av)
+int check_main(char **map, t_map *x, t_player *p)
 {
-	(void) ac;
-	int fd = open("./maps/example.ber", O_RDONLY);
-	t_map *x = malloc(sizeof(t_map));
-	t_player *p = malloc(sizeof(t_player *));
-	int fd2 = open("./maps/example.ber", O_RDONLY);
-	if(!ft_get_map_data(fd, x))
-	{
-		printf("Gnl ile okuma yaparken hata aldık map hatalı. \n\n");
+	if(!check_map(map, x) || !check_path(map, x, p))
 		return (0);
-	}
-	char **map = init_map(x, fd2);
-	if(!ft_get_player_data(map, p))
-	{
-		printf("Player hatalı. \n\n");
-		return (0);
-	}
-	if(!check_map(map, x, p, av[1]))
-	{
-		printf("Check_map Map is incorrect\n");
-		return (0);
-	}
-	printf("Map was clear \n");
-	//writemap(map);
-	int i = 0;
+	return (1);
+}
+
+void free_map(char **map)
+{
+	int i;
+	
+	i = 0;
 	while(map[i])
 	{
 		free(map[i++]);
 	}
 	free(map);
-	int fd3 = open("./maps/example.ber", O_RDONLY);
-	map = init_map(x, fd3);
-	//writemap(map);
+}
+
+int main(int ac, char **av)
+{
+	t_map *map_data;
+	t_player *p;
+	t_window *window;
+	int fd ;
 	
-	t_window *window = malloc(sizeof(t_window));
+	map_data = malloc(sizeof(t_map));
+	p = malloc(sizeof(t_player *));
+	window = malloc(sizeof(t_window));
 	window->img = malloc(sizeof(t_img));
-	window->map = map;
-	window->player = p;
-	if(!init_window(window, x))
-	{
-		printf("Window initilize hatası\n");
-	}
+	if(!check_ber(ac, av[1]))
+		return (0);
+	fd = open(av[1], O_RDONLY);
+	if(!init_map_data(fd, map_data))
+		return (0);
+	fd = open(av[1], O_RDONLY);
+	char **map = init_map(map_data, fd);
+	if(!init_player_data(map, p))
+		return(0);
+	if(!check_main(map, map_data, p))
+		return (0);
+	free_map(map);
+	fd = open(av[1], O_RDONLY);
+	map = init_map(map_data, fd);
+	if(!map)
+		return (0);
+	if(!init_window(window, map_data, map, p))
+		return(0);
 	draw_map(window);
 	mlx_hook(window->mlx_win, 2, 0, keyhandle, window);
 	mlx_hook(window->mlx_win, 17, 0, exit_window, window);

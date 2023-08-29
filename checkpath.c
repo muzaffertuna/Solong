@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:27:11 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/29 17:12:53 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/29 21:22:46 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	fill_flood(char **map, int i, int j, t_map *x)
 	fill_flood(map, i, j - 1, x);
 }
 
-int	check_path(char **map)
+int	check_ff(char **map)
 {
 	int	i;
 	int	j;
@@ -44,6 +44,26 @@ int	check_path(char **map)
 			j++;
 		}
 		i++;
+	}
+	return (1);
+}
+void write_map(char **map)
+{
+	int i = 0;
+	while(map[i])
+	{
+		printf("%s\n", map[i]);
+		i++;
+	}
+}
+
+int check_path(char **map, t_map *x, t_player *p)
+{	
+	fill_flood(map, p->p_row, p->p_col, x);
+	if (!check_ff(map))
+	{
+		write(2, "There is not correct path between player and exit.\n", 52);
+		return (0);
 	}
 	return (1);
 }

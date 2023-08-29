@@ -6,63 +6,73 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:46:15 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/29 17:06:38 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/29 21:56:44 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
 
-int	init_window(t_window *window, t_map *map)
+int	init_window(t_window *w, t_map *map_data, char **map, t_player *player)
 {
 	int	x;
 	int	y;
 
-	window->mlx = mlx_init();
-	window->mlx_win = mlx_new_window(window->mlx, map->column * 64, map->row * 64, "Game Screen");
-	window->check = 0;
-	window->move_count = 0;
-	window->img->img_p = mlx_xpm_file_to_image(window->mlx, "./img/p.xpm", &x, &y);
-	window->img->img_c = mlx_xpm_file_to_image(window->mlx, "./img/c.xpm", &x, &y);
-	window->img->img_w = mlx_xpm_file_to_image(window->mlx, "./img/w.xpm", &x, &y);
-	window->img->img_e = mlx_xpm_file_to_image(window->mlx, "./img/e.xpm", &x, &y);
-	window->img->img_bg = mlx_xpm_file_to_image(window->mlx, "./img/b.xpm", &x, &y);
-	if (!window->img->img_p || !window->img->img_c || !window->img->img_w || !window->img->img_e || !window->img->img_bg)
+	if (!w)
+		return (0);
+	w->mlx = mlx_init();
+	w->mlx_win = mlx_new_window(w->mlx, map_data->column * 64,
+			map_data->row * 64, "Game Screen");
+	w->check = 0;
+	w->move_count = 0;
+	w->img->img_p = mlx_xpm_file_to_image(w->mlx, "./img/p.xpm", &x, &y);
+	w->img->img_c = mlx_xpm_file_to_image(w->mlx, "./img/c.xpm", &x, &y);
+	w->img->img_w = mlx_xpm_file_to_image(w->mlx, "./img/w.xpm", &x, &y);
+	w->img->img_e = mlx_xpm_file_to_image(w->mlx, "./img/e.xpm", &x, &y);
+	w->img->img_bg = mlx_xpm_file_to_image(w->mlx, "./img/b.xpm", &x, &y);
+	w->map = map;
+	w->player = player;
+	if (!w->img->img_p || !w->img->img_c || !w->img->img_w || 
+		!w->img->img_e || !w->img->img_bg || !w->map || !w->player)
 		return (0);
 	return (1);
 }
 
-int	ft_get_map_data(int fd, t_map *x)
+int	init_map_data(int fd, t_map *map_data)
 {
 	char	*s;
 
-	if (!fd)
+	if (fd == -1 || !map_data)
 		return (0);
 	s = get_next_line(fd);
-	x->column = ft_strlen(s);
-	x->row = 0;
+	map_data->column = ft_strlen(s);
+	map_data->row = 0;
 	while (s)
 	{
-		if (x->column != ft_strlen(s))
+		if (map_data->column != ft_strlen(s))
 		{
-			free(x);
+			free(map_data);
 			free(s);
+			printf("Gnl ile okuma yaparken hata aldık map hatalı. \n\n");
 			return (0);
 		}
-		x->column = ft_strlen(s);
+		map_data->column = ft_strlen(s);
 		free(s);
 		s = get_next_line(fd);
-		x->row++;
+		map_data->row++;
 	}
 	free(s);
+	close(fd);
 	return (1);
 }
 
-int	ft_get_player_data(char **map, t_player *p)
+int	init_player_data(char **map, t_player *p)
 {
 	int	i;
 	int	j;
 
 	i = 0;
+	if(!map)
+		return (0);
 	while (map[i])
 	{
 		j = 0;
@@ -87,7 +97,7 @@ char	**init_map(t_map *x, int fd)
 	char	**map;
 
 	i = 0;
-	if (!fd)
+	if (fd == -1)
 		return (NULL);
 	map = (char **)malloc(sizeof(char *) * (x->row + 1));
 	while (i < x->row)
@@ -95,5 +105,6 @@ char	**init_map(t_map *x, int fd)
 		map[i++] = get_next_line(fd);
 	}
 	map[i] = NULL;
+	close(fd);
 	return (map);
 }
