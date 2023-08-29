@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:01:09 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/28 20:01:50 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/29 16:39:29 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int exit_window(t_window *window)
         free(window->map[i++]);
     }
     free(window->map);
-    system("leaks solong");
+    free(window->player);
     exit(1);
     return (1);
 }

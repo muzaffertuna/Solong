@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 19:18:41 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/28 19:13:06 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/29 17:12:55 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	keyhandle(int keycode, t_window *window)
 		window->check = move_up(window);
 	else if (keycode == 53)
 	{
-		printf("ESC exit. \n");
+		write(2, "ESC exit. \n", 11);
 		exit_window(window);
 		return (1);
 	}

@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:35:10 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/28 18:58:42 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/29 17:12:54 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,9 @@ int check_map_element_start(char **map);
 int check_map_element_exit(char **map);
 int check_map_element_coll(char **map);
 int check_ber(char *s);
-int check_player_free(char **map);
 void fill_flood(char **map, int i, int j, t_map *x);
 int check_path(char **map);
 int check_map(char **map, t_map *x, t_player *p, char *s);
-void writemap(char **map);
 void    draw_map(t_window *window);
 int init_window(t_window *window, t_map *map);
 int keyhandle(int keycode , t_window *window);
@@ -77,5 +75,5 @@ int move_right(t_window *window);
 int move_up(t_window *window);
 int move_down(t_window *window);
 int exit_window(t_window *window);
-
+void put_image(t_window *window, t_img *img, int j, int i);
 #endif

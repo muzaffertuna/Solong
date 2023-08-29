@@ -6,35 +6,41 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 15:59:40 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/28 13:03:56 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/29 16:37:53 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
 
-void    draw_map(t_window *window)
+void	draw_map(t_window *window)
 {
-        int i;
-        int j;
+	int	i;
+	int	j;
 
-        i = 0;
-        while (window->map[i])
-        {
-            j = 0;
-            while(window->map[i][j])
-            {
-                if(window->map [i][j] == 'P')
-                    mlx_put_image_to_window(window->mlx, window->mlx_win, window->img->img_p, j * 64, i * 64);
-                if(window->map [i][j] == 'C')
-                    mlx_put_image_to_window(window->mlx, window->mlx_win, window->img->img_c, j * 64, i * 64);
-                if(window->map [i][j] == 'E')
-                    mlx_put_image_to_window(window->mlx, window->mlx_win, window->img->img_e, j * 64, i * 64);
-                if(window->map [i][j] == '0')
-                    mlx_put_image_to_window(window->mlx, window->mlx_win, window->img->img_bg, j * 64, i * 64);
-                if(window->map [i][j] == '1')
-                    mlx_put_image_to_window(window->mlx, window->mlx_win, window->img->img_w, j * 64, i * 64);
-                j++;
-            }
-            i++;
-        }
+	i = 0;
+	while (window->map[i])
+	{
+		j = 0;
+		while (window->map[i][j])
+		{
+			if (window->map [i][j] == 'P')
+				put_image(window, window->img->img_p, j, i);
+			if (window->map [i][j] == 'C')
+				put_image(window, window->img->img_c, j, i);
+			if (window->map [i][j] == 'E')
+				put_image(window, window->img->img_e, j, i);
+			if (window->map [i][j] == '0')
+				put_image(window, window->img->img_bg, j, i);
+			if (window->map [i][j] == '1')
+				put_image(window, window->img->img_w, j, i);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	put_image(t_window *window, t_img *img, int j, int i)
+{
+	mlx_put_image_to_window(window->mlx, window->mlx_win, 
+		img, j * 64, i * 64);
 }
