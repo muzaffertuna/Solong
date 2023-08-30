@@ -6,21 +6,11 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:59:02 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/07/22 19:23:44 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:35:41 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-int	ft_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
 
 char	*ft_strjoin(char *str, char *buf)
 {

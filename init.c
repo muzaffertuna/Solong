@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:46:15 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/29 21:56:44 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:38:54 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	init_map_data(int fd, t_map *map_data)
 		{
 			free(map_data);
 			free(s);
-			printf("Gnl ile okuma yaparken hata aldık map hatalı. \n\n");
+			write(2, "Gnl ile okuma yaparken hata aldık map hatalı. \n", 49);
 			return (0);
 		}
 		map_data->column = ft_strlen(s);
@@ -71,7 +71,7 @@ int	init_player_data(char **map, t_player *p)
 	int	j;
 
 	i = 0;
-	if(!map)
+	if (!map)
 		return (0);
 	while (map[i])
 	{
@@ -91,11 +91,12 @@ int	init_player_data(char **map, t_player *p)
 	return (0);
 }
 
-char	**init_map(t_map *x, int fd)
+char	**init_map(t_map *x, int fd, char *s)
 {
 	int		i;
 	char	**map;
 
+	fd = open(s, O_RDONLY);
 	i = 0;
 	if (fd == -1)
 		return (NULL);

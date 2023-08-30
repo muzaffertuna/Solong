@@ -6,7 +6,7 @@ CC = gcc -Wall -Wextra -Werror -fsanitize=address
 
 OBJS = $(SRCS:.c=.o)
 
-ARCS = gnl/get_next_line.a mlx/libmlx.a 
+ARCS = gnl/get_next_line.a mlx/libmlx.a ft_printf/libftprintf.a
 
 FRMS = -framework OpenGL -framework AppKit
 
@@ -15,15 +15,18 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	@cd ./mlx && $(MAKE)
 	@cd ./gnl && $(MAKE)
+	@cd ./ft_printf && $(MAKE)
 	$(CC) $(ARCS) $(FRMS) $(OBJS) -o $(NAME)
 
 clean : 
 	@cd ./gnl && $(MAKE) clean
+	@cd ./ft_printf && $(MAKE) clean
 	rm -rf $(OBJS)
 
 fclean : clean
 	@cd ./mlx && $(MAKE) clean
 	@cd ./gnl && $(MAKE) fclean
+	@cd ./ft_printf && $(MAKE) fclean
 	rm -rf $(NAME)
 
 re : fclean all

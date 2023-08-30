@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:27:11 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/29 21:22:46 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:38:11 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,9 @@ int	check_ff(char **map)
 	}
 	return (1);
 }
-void write_map(char **map)
-{
-	int i = 0;
-	while(map[i])
-	{
-		printf("%s\n", map[i]);
-		i++;
-	}
-}
 
-int check_path(char **map, t_map *x, t_player *p)
-{	
+int	check_path(char **map, t_map *x, t_player *p)
+{
 	fill_flood(map, p->p_row, p->p_col, x);
 	if (!check_ff(map))
 	{

@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:01:09 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/29 17:36:14 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:34:06 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	move_left(t_window *window)
 	if (window->map[i][j] == 'E' && coll_control_to_exit(window->map))
 	{
 		window->map[i][j + 1] = '0';
-		printf("move count : %d\n", window->move_count + 1);
-		printf("GAME OVER\n");
+		ft_printf("move count : %d\n", window->move_count + 1);
+		ft_printf("GAME OVER\n");
 		exit_window(window);
 		return (1);
 	}
@@ -74,8 +74,8 @@ int	move_right(t_window *window)
 	if (window->map[i][j] == 'E' && coll_control_to_exit(window->map))
 	{
 		window->map[i][j - 1] = '0';
-		printf("move count : %d\n", window->move_count + 1);
-		printf("GAME OVER\n");
+		ft_printf("move count : %d\n", window->move_count + 1);
+		ft_printf("GAME OVER\n");
 		exit_window(window);
 		return (1);
 	}
@@ -99,8 +99,8 @@ int	move_down(t_window *window)
 	if (window->map[i][j] == 'E' && coll_control_to_exit(window->map))
 	{
 		window->map[i - 1][j] = '0';
-		printf("move count : %d\n", window->move_count + 1);
-		printf("GAME OVER\n");
+		ft_printf("move count : %d\n", window->move_count + 1);
+		ft_printf("GAME OVER\n");
 		exit_window(window);
 		return (1);
 	}
@@ -124,8 +124,8 @@ int	move_up(t_window *window)
 	if (window->map[i][j] == 'E' && coll_control_to_exit(window->map))
 	{
 		window->map[i + 1][j] = '0';
-		printf("move count : %d\n", window->move_count + 1);
-		printf("GAME OVER\n");
+		ft_printf("move count : %d\n", window->move_count + 1);
+		ft_printf("GAME OVER\n");
 		exit_window(window);
 		return (1);
 	}

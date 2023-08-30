@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:23:44 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/29 21:46:04 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:37:05 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,10 @@ int	check_ber(int ac, char *av)
 {
 	int	i;
 
-	if(ac != 2)
+	if (ac != 2)
 	{
 		write(2, "Arguments number must be 2", 27);
-		return(0);
+		return (0);
 	}
 	if (!av)
 	{

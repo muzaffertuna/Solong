@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 19:18:41 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/29 18:12:25 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:31:57 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	keyhandle(int keycode, t_window *window)
 	if (window->check)
 	{
 		window->move_count += 1;
-		printf("move count : %d\n", window->move_count);
+		ft_printf("move count : %d\n", window->move_count);
 	}
 	draw_map(window);
 	return (1);
