@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 18:42:10 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/30 16:13:14 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/31 16:41:52 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ int	main(int ac, char **av)
 	int			fd ;
 	char		**map;
 
-	init_malloc(&map_data, &p, &window);
-	if (!check_ber(ac, av[1]))
-		return (0);
 	fd = open(av[1], O_RDONLY);
+	if (!check_ber(ac, av[1], fd))
+		return (0);
+	init_malloc(&map_data, &p, &window);
 	if (!init_map_data(fd, map_data))
 		return (0);
 	map = init_map(map_data, fd, av[1]);

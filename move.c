@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:01:09 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/30 16:34:06 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/31 16:37:10 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	move_left(t_window *window)
 	if (window->map[i][j] == 'E' && coll_control_to_exit(window->map))
 	{
 		window->map[i][j + 1] = '0';
-		ft_printf("move count : %d\n", window->move_count + 1);
+		ft_printf("Move count : %d\n", window->move_count + 1);
 		ft_printf("GAME OVER\n");
 		exit_window(window);
 		return (1);
@@ -74,7 +74,7 @@ int	move_right(t_window *window)
 	if (window->map[i][j] == 'E' && coll_control_to_exit(window->map))
 	{
 		window->map[i][j - 1] = '0';
-		ft_printf("move count : %d\n", window->move_count + 1);
+		ft_printf("Move count : %d\n", window->move_count + 1);
 		ft_printf("GAME OVER\n");
 		exit_window(window);
 		return (1);
@@ -99,7 +99,7 @@ int	move_down(t_window *window)
 	if (window->map[i][j] == 'E' && coll_control_to_exit(window->map))
 	{
 		window->map[i - 1][j] = '0';
-		ft_printf("move count : %d\n", window->move_count + 1);
+		ft_printf("Move count : %d\n", window->move_count + 1);
 		ft_printf("GAME OVER\n");
 		exit_window(window);
 		return (1);
@@ -124,7 +124,7 @@ int	move_up(t_window *window)
 	if (window->map[i][j] == 'E' && coll_control_to_exit(window->map))
 	{
 		window->map[i + 1][j] = '0';
-		ft_printf("move count : %d\n", window->move_count + 1);
+		ft_printf("Move count : %d\n", window->move_count + 1);
 		ft_printf("GAME OVER\n");
 		exit_window(window);
 		return (1);

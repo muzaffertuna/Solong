@@ -3,6 +3,7 @@
         "get_next_line.h": "c",
         "mlx.h": "c",
         "unistd.h": "c",
-        "solong.h": "c"
+        "solong.h": "c",
+        "stdlib.h": "c"
     }
 }

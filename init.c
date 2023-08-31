@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:46:15 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/30 16:38:54 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/31 16:40:26 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	init_window(t_window *w, t_map *map_data, char **map, t_player *player)
 			map_data->row * 64, "Game Screen");
 	w->check = 0;
 	w->move_count = 0;
-	w->img->img_p = mlx_xpm_file_to_image(w->mlx, "./img/p.xpm", &x, &y);
-	w->img->img_c = mlx_xpm_file_to_image(w->mlx, "./img/c.xpm", &x, &y);
-	w->img->img_w = mlx_xpm_file_to_image(w->mlx, "./img/w.xpm", &x, &y);
-	w->img->img_e = mlx_xpm_file_to_image(w->mlx, "./img/e.xpm", &x, &y);
-	w->img->img_bg = mlx_xpm_file_to_image(w->mlx, "./img/b.xpm", &x, &y);
+	w->img->img_p = mlx_xpm_file_to_image(w->mlx, "./img/dolphin.xpm", &x, &y);
+	w->img->img_c = mlx_xpm_file_to_image(w->mlx, "./img/fish.xpm", &x, &y);
+	w->img->img_w = mlx_xpm_file_to_image(w->mlx, "./img/newgrass.xpm", &x, &y);
+	w->img->img_e = mlx_xpm_file_to_image(w->mlx, "./img/exitnew.xpm", &x, &y);
+	w->img->img_bg = mlx_xpm_file_to_image(w->mlx, "./img/newsea.xpm", &x, &y);
 	w->map = map;
 	w->player = player;
 	if (!w->img->img_p || !w->img->img_c || !w->img->img_w || 
@@ -52,7 +52,7 @@ int	init_map_data(int fd, t_map *map_data)
 		{
 			free(map_data);
 			free(s);
-			write(2, "Gnl ile okuma yaparken hata aldık map hatalı. \n", 49);
+			write(2, "Error\nIncorrect map reading.\n", 29);
 			return (0);
 		}
 		map_data->column = ft_strlen(s);

@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 15:59:40 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/29 16:37:53 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/31 16:37:14 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,15 @@ void	draw_map(t_window *window)
 		j = 0;
 		while (window->map[i][j])
 		{
-			if (window->map [i][j] == 'P')
-				put_image(window, window->img->img_p, j, i);
+			put_image(window, window->img->img_bg, j, i);
 			if (window->map [i][j] == 'C')
 				put_image(window, window->img->img_c, j, i);
 			if (window->map [i][j] == 'E')
 				put_image(window, window->img->img_e, j, i);
-			if (window->map [i][j] == '0')
-				put_image(window, window->img->img_bg, j, i);
 			if (window->map [i][j] == '1')
 				put_image(window, window->img->img_w, j, i);
+			if (window->map [i][j] == 'P')
+				put_image(window, window->img->img_p, j, i);
 			j++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:35:10 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/30 16:39:23 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/31 16:37:11 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "gnl/get_next_line.h"
 # include "ft_printf/ft_printf.h"
 
-# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 
@@ -62,7 +61,7 @@ int		check_walls(char **map, t_map *x);
 int		check_map_element_start(char **map);
 int		check_map_element_exit(char **map);
 int		check_map_element_coll(char **map);
-int		check_ber(int ac, char *av);
+int		check_ber(int ac, char *av, int fd);
 void	fill_flood(char **map, int i, int j, t_map *x);
 int		check_ff(char **map);
 int		check_path(char **map, t_map *x, t_player *p);

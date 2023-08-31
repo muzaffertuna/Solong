@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:23:44 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/08/30 16:37:05 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/08/31 16:37:12 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,26 +109,26 @@ int	check_map_element_coll(char **map)
 	return (1);
 }
 
-int	check_ber(int ac, char *av)
+int	check_ber(int ac, char *av, int fd)
 {
 	int	i;
 
-	if (ac != 2)
+	if (ac != 2 || !av)
 	{
-		write(2, "Arguments number must be 2", 27);
-		return (0);
-	}
-	if (!av)
-	{
-		write(2, "Invalid argument", 16);
+		write(2, "Error\nInvalid argument", 22);
 		return (0);
 	}
 	i = ft_strlen(av);
 	i--;
 	if (av[i] != 'r' || av[i - 1] != 'e' || av[i - 2] != 'b')
 	{
-		write(2, "File extensiton must be .ber \n", 31);
+		write(2, "Error\nFile extensiton must be .ber \n", 36);
 		return (0);
+	}
+	if(fd == -1)
+	{
+		write(2, "Error\nFile descriptor error.\n", 29);
+		return(0);
 	}
 	return (1);
 }
