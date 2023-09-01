@@ -2,8 +2,7 @@ SRCS = checkmap.c checkmap2.c checkpath.c drawmap.c init.c main.c handle.c move.
 
 NAME = so_long
 
-CC = gcc -Wall -Wextra -Werror -fsanitize=address
-
+CC = gcc -Wall -Wextra -Werror
 OBJS = $(SRCS:.c=.o)
 
 ARCS = gnl/get_next_line.a mlx/libmlx.a ft_printf/libftprintf.a
