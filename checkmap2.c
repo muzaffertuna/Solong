@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:23:44 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/09/01 15:44:57 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/09/01 18:30:30 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,10 @@ int	check_ber(int ac, char *av, int fd)
 		write(2, "Error\nFile extensiton must be .ber \n", 36);
 		return (0);
 	}
-	if(fd == -1)
+	if (fd == -1)
 	{
 		write(2, "Error\nFile descriptor error.\n", 29);
-		return(0);
+		return (0);
 	}
 	return (1);
 }
