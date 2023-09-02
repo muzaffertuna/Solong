@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 18:42:10 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/09/01 15:17:49 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/09/02 16:14:40 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ int	main(int ac, char **av)
 	if (!init_map_data(fd, map_data))
 		return (0);
 	map = init_map(map_data, fd, av[1]);
-	if (!init_player_data(map, p))
-		return (0);
+	init_player_data(map, p);
 	if (!check_main(map, map_data, p))
 		return (0);
 	free_map(map);

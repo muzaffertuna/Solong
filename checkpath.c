@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:27:11 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/09/01 18:31:56 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/09/02 16:10:46 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	check_path(char **map, t_map *x, t_player *p)
 	fill_flood(map, p->p_row, p->p_col, x);
 	if (!check_ff(map))
 	{
-		write(2, "Error\nThere isn't true path between player and exit.\n", 57);
+		write(2, "Error\nThere isn't true path between player and exit.\n", 53);
 		return (0);
 	}
 	return (1);

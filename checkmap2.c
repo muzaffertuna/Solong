@@ -6,7 +6,7 @@
 /*   By: mtoktas <mtoktas@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:23:44 by mtoktas           #+#    #+#             */
-/*   Updated: 2023/09/01 18:30:30 by mtoktas          ###   ########.fr       */
+/*   Updated: 2023/09/02 16:15:14 by mtoktas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,8 @@ int	check_ber(int ac, char *av, int fd)
 	}
 	i = ft_strlen(av);
 	i--;
-	if (av[i] != 'r' || av[i - 1] != 'e' || av[i - 2] != 'b')
+	if (av[i] != 'r' || av[i - 1] != 'e' 
+		|| av[i - 2] != 'b' || av[i - 3] != '.')
 	{
 		write(2, "Error\nFile extensiton must be .ber \n", 36);
 		return (0);
