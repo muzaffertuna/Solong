@@ -61,6 +61,8 @@ Screenshots
 <img width="2176" alt="SO_LONG" src="https://github.com/muzaffertuna/Solong/assets/92475119/a1f72730-a1c8-4681-b41a-13386cecec04">
 
 
+
+
 Start the Game
 When starting the game, we first compile all the files using the "make" command, thanks to our Makefile. Afterward, we execute the "./so_long" file, providing it with the necessary map as follows:
 
